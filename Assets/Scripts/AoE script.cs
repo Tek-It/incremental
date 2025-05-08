@@ -13,11 +13,11 @@ public class AoEscript : MonoBehaviour
         Vector2 origin = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Collider2D[] colliders = Physics2D.OverlapCircleAll(origin, radius, AoE);
 
-        foreach(Collider2D c in colliders)
+        foreach(Collider2D col in colliders)
         {
-            if (c.GetComponent<Enemy>())
+            if (col.GetComponent<Enemy>())
             {
-                c.GetComponent<Enemy>()._damaged();
+                col.GetComponent<Enemy>()._damaged();
                 
             }
         }

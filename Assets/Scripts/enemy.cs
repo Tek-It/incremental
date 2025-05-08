@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Timers;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -21,8 +22,10 @@ public class Enemy : MonoBehaviour
     [SerializeField] private GameObject xp;
     public void _damaged()
     {
+        GetComponent<SpriteRenderer>().color = Color.red;
         _health--;
         Debug.Log("enemy health is now" + _health);
+        GetComponent<SpriteRenderer>().color = Color.white;
         if (_health <= 0)
         {
             Enemypos = GetComponent<Transform>();

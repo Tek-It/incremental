@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Magnet : MonoBehaviour
 { 
@@ -12,14 +14,14 @@ public class Magnet : MonoBehaviour
         Vector2 origin = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Collider2D[] colliders = Physics2D.OverlapCircleAll(origin, radius, Magnetlayer);
 
-        foreach (Collider2D c in colliders)
+        foreach (Collider2D col in colliders)
         {
-            if (c.GetComponent<ParticleSystem>())
+            if (col.GetComponent<ParticleSystem>())
         {
                 Debug.Log("magnet responds");
-                c.GetComponent<ParticleSystem>().Stop();
-
-           }
+                Destroy(col.gameObject);
+                FindObjectOfType<Score>().Pointsadding();
+            }
        }
 }
 
@@ -34,4 +36,5 @@ public class Magnet : MonoBehaviour
     {
         Magnetizexp();
     }
+    
 }

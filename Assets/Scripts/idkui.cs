@@ -1,15 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class Score : MonoBehaviour
+public class idkui : MonoBehaviour
 {
+    public GameObject Menupanel;
     // Start is called before the first frame update
-    [SerializeField] private Text _scoreText;
     void Start()
     {
-        _ = _scoreText.text == " Score" + 0;
+        Menupanel.SetActive(true);
     }
 
     // Update is called once per frame
