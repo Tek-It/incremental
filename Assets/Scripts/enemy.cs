@@ -23,8 +23,8 @@ public class Enemy : MonoBehaviour
     public void _damaged()
     {
         GetComponent<SpriteRenderer>().color = Color.red;
-        _health--;
-        Debug.Log("enemy health is now" + _health);
+        _health = _health - PlayerPrefs.GetFloat("PlayerDmg",1);
+        Debug.Log("enemy health is now " + _health);
         GetComponent<SpriteRenderer>().color = Color.white;
         if (_health <= 0)
         {

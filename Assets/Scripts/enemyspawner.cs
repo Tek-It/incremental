@@ -7,7 +7,9 @@ public class enemyspawner : MonoBehaviour
     // Start is called before the first frame update
 
     [SerializeField]
-    private GameObject EnemyPrefab;
+    public GameObject[] EnemyPrefab;
+    
+    
 
     [SerializeField]
     public float MinimumSpawnTime;
@@ -32,7 +34,8 @@ public class enemyspawner : MonoBehaviour
         TimeUntilSpawn -= Time.deltaTime;
         if (TimeUntilSpawn <= 0)
         {
-            Instantiate(EnemyPrefab, transform.position, Quaternion.identity);
+            int randomEnemy = Random.Range(0, EnemyPrefab.Length);
+            Instantiate(EnemyPrefab[randomEnemy], transform.position, Quaternion.identity);
             SetTimeUntilSpawn();
         }
     }
