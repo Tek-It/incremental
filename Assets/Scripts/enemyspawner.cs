@@ -1,31 +1,39 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class enemyspawner : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    [SerializeField]
     public GameObject[] EnemyPrefab;
+    public int Counter = 0;
     
     
 
-    [SerializeField]
     public float MinimumSpawnTime;
 
-    [SerializeField]
+    
     public float MaximumSpawnTime;
 
-    [SerializeField]
+    
     public float TimeUntilSpawn;
-
-
-
+    public GameObject enemy2;
 
     void Start()
     {
         SetTimeUntilSpawn();
+        if (PlayerPrefs.GetInt("Triangles",0) != 0)
+        {
+            Counter = Counter + 2;
+            Debug.Log(Counter);
+        }
+        if (PlayerPrefs.GetInt("Hexagons", 0) != 0)
+        {
+            Counter = Counter + 1;
+            Debug.Log(Counter);
+        }
     }
 
     // Update is called once per frame
@@ -34,8 +42,7 @@ public class enemyspawner : MonoBehaviour
         TimeUntilSpawn -= Time.deltaTime;
         if (TimeUntilSpawn <= 0)
         {
-            int randomEnemy = Random.Range(0, EnemyPrefab.Length);
-            Instantiate(EnemyPrefab[randomEnemy], transform.position, Quaternion.identity);
+            Instantiate(EnemyPrefab[Random.Range(0, Counter)], transform.position, Quaternion.identity);
             SetTimeUntilSpawn();
         }
     }

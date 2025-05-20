@@ -12,15 +12,17 @@ public class Enemy : MonoBehaviour
 
     public PhysicsMaterial2D bouncyMaterial;
 
-    [SerializeField] private float _speed;
+    public float _speed;
 
     private Rigidbody2D _rigidbody;
 
-    [SerializeField] private float _health;
+    public float _health;
+
+    public int xpdropcounter;
 
     private Transform Enemypos;
-    [SerializeField] private GameObject xp;
-    public void _damaged()
+    public GameObject xp;
+    public void Damaged()
     {
         GetComponent<SpriteRenderer>().color = Color.red;
         _health = _health - PlayerPrefs.GetFloat("PlayerDmg",1);
@@ -29,16 +31,24 @@ public class Enemy : MonoBehaviour
         if (_health <= 0)
         {
             Enemypos = GetComponent<Transform>();
+            
             XPdrop();
+            
             Destroy(gameObject);
             
-
-
         }
     }
     public void XPdrop()
     {
-        Instantiate(xp, Enemypos.position, Quaternion.identity);
+        for (int i = 0; i < xpdropcounter; i++)
+        {
+            Instantiate(xp, Enemypos.position, Quaternion.identity);
+            Debug.Log("xp spawned");
+        }
+
+        
+        
+        
     }
     private void SetVelocity()
     {
@@ -56,6 +66,7 @@ public class Enemy : MonoBehaviour
 
     void Start()
     {
+        
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<Collider2D>();
 

@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class AoEscript : MonoBehaviour
 
 {
-    [SerializeField] LayerMask AoE;
-    [SerializeField] float radius;
+     public LayerMask AoE;
+     public float radius;
+    public AudioClip click;
+    public float volume = 3;
 
     public void AreaOfEffectDamage()
     {
@@ -17,7 +20,7 @@ public class AoEscript : MonoBehaviour
         {
             if (col.GetComponent<Enemy>())
             {
-                col.GetComponent<Enemy>()._damaged();
+                col.GetComponent<Enemy>().Damaged();
                 
             }
         }
@@ -34,7 +37,9 @@ public class AoEscript : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
+            Vector2 origin = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             AreaOfEffectDamage();
+            AudioSource.PlayClipAtPoint(click, origin, volume);
             Debug.Log("you pressed m1");
         }
     }

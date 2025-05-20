@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 
 public class Magnet : MonoBehaviour
 { 
-    [SerializeField] LayerMask Magnetlayer;
-    [SerializeField] float radius;
+    public LayerMask Magnetlayer;
+    public float radius;
+    public AudioClip coin;
 
     public void Magnetizexp()
     {
@@ -19,6 +21,7 @@ public class Magnet : MonoBehaviour
             if (col.GetComponent<ParticleSystem>())
         {
                 Debug.Log("magnet responds");
+                AudioSource.PlayClipAtPoint(coin, transform.position);
                 Destroy(col.gameObject);
                 FindObjectOfType<Score>().Pointsadding();
             }
