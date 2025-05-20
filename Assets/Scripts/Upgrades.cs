@@ -10,6 +10,7 @@ public class Upgrades : MonoBehaviour
     public int dmglvl;
     public Text damagecost;
     public Text enemycost;
+    public Text enemycost2;
 
 
     public void OnGoBackButton()
@@ -69,6 +70,6 @@ public class Upgrades : MonoBehaviour
     {
         damagecost.text = "cost : " + 50 * (1+dmglvl);
         enemycost.text = "cost : " + 20;
-        enemycost.text = "cost : " + 50;
+        enemycost2.text = "cost : " + 50;
     }
 }
